@@ -11,20 +11,20 @@ type Config struct {
 	SpecURL string
 }
 
-// RedocScript standalone javascript
+// ReDocScript standalone javascript
 //
 //go:embed assets/redoc.standalone.js
-var RedocScript string
+var ReDocScript string
 
-type Redoc interface {
+type ReDoc interface {
 	Handler() http.HandlerFunc
 }
 
-type redoc struct {
+type reDoc struct {
 	Cfg Config
 }
 
-func (rd *redoc) Handler() http.HandlerFunc {
+func (rd *reDoc) Handler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		tmpl, err := template.ParseFiles("assets/index.html")
 		if err != nil {
@@ -39,7 +39,7 @@ func (rd *redoc) Handler() http.HandlerFunc {
 		}{
 			Title:   rd.Cfg.Title,
 			SpecURL: rd.Cfg.SpecURL,
-			Script:  template.JS(RedocScript),
+			Script:  template.JS(ReDocScript),
 		}
 		err = tmpl.Execute(w, data)
 		if err != nil {
@@ -49,8 +49,8 @@ func (rd *redoc) Handler() http.HandlerFunc {
 	}
 }
 
-func New(c Config) Redoc {
-	return &redoc{
+func New(c Config) ReDoc {
+	return &reDoc{
 		Cfg: c,
 	}
 }
