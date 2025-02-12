@@ -1,3 +1,7 @@
+package goredoc
+
+const indexTmpl string = `
+<!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,4 +14,4 @@
     <redoc spec-url='{{ .SpecURL }}'></redoc>
     <script>{{ .Script }}</script>
 </body>
-</html>
+</html>`

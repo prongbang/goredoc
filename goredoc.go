@@ -26,7 +26,7 @@ type reDoc struct {
 
 func (rd *reDoc) Handler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("assets/index.html")
+		tmpl, err := template.New("index.html").Parse(indexTmpl)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
